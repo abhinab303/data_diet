@@ -144,6 +144,8 @@ def train(args):
       test_loss, test_acc = test(test_step, state, X_test, Y_test, args.test_batch_size)
       rec, time_now = _record_test(rec, t, args.num_steps, time_now, time_start, lr(t), acc, test_acc, test_loss)
 
+      print("size: ", float(getsizeof(rec) * 1e-6))
+
     # every early_save_steps before early_step and save_steps after early_step, and at end of training
     if ((t <= args.early_step and t % args.early_save_steps == 0) or
        (t > args.early_step and t % args.save_steps == 0) or
@@ -157,7 +159,7 @@ def train(args):
       # save checkpoint
       rec = _save_checkpoint(args.save_dir, t, state, rec, forget_stats)
 
-    print("size: ", float(getsizeof(rec) * 1e-6))
+      print("size: ", float(getsizeof(rec) * 1e-6))
 
   # wrap it up
   save_recorder(args.save_dir, rec)
