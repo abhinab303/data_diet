@@ -11,6 +11,7 @@ from .test import get_test_step, test
 from .train_state import TrainState, get_train_state
 from .utils import make_dir, print_args, save_args, set_global_seed
 
+from sys import getsizeof
 
 ########################################################################################################################
 #  Getters
@@ -155,6 +156,8 @@ def train(args):
 
       # save checkpoint
       rec = _save_checkpoint(args.save_dir, t, state, rec, forget_stats)
+
+    print("size: ", float(getsizeof(rec) * 1e-6))
 
   # wrap it up
   save_recorder(args.save_dir, rec)
