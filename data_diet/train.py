@@ -101,9 +101,13 @@ def _save_checkpoint(save_dir, step, state, rec, forget_stats=None):
 ########################################################################################################################
 #  Train
 ########################################################################################################################
+import gc
 
 def train(args):
   # setup
+
+  gc.collect()
+
   set_global_seed()
   _make_dirs(args)
   I_train, X_train, Y_train, X_test, Y_test, args = load_data(args)
@@ -131,6 +135,7 @@ def train(args):
   # train loop
   for t, idxs, x, y in train_batches(I_train, X_train, Y_train, args):
     # train step
+
     state, logits, loss, acc = train_step(state, x, y, lr(t))
     if args.track_forgetting:
       batch_accs = np.array(correct(logits, y).astype(int))
