@@ -42,8 +42,10 @@ args.decay_steps = [60*EP_STEPS, 120*EP_STEPS, 160*EP_STEPS]
 # training
 args.num_steps = 200*EP_STEPS
 args.train_seed = META_TRAIN_SEED + RUN * SEED_INCR
-args.train_batch_size = 128
-args.test_batch_size = 1024
+# args.train_batch_size = 128
+# args.test_batch_size = 1024
+args.train_batch_size = 56
+args.test_batch_size = 56
 args.augment = True
 args.track_forgetting = False
 # checkpoints
